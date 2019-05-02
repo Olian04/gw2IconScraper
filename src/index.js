@@ -38,17 +38,32 @@ const URLS = {
   try {
     console.info('Starting puppeteer');
     const browser = await puppeteer.launch();
+    const page = await browser.newPage();
 
     const imagesDownloading = [];
     const pagesToScrape = [ URLS.gw2ArenaNetIcons ];
+    let failedNavigations = 0;
+    const maximumAllowedFailedNavigations = 10;
 
     while (pagesToScrape.length > 0) {
       const currentPage = pagesToScrape.pop();
       const currentPageName = currentPage.substring(currentPage.lastIndexOf('/Category:') + '/Category:'.length);
 
-      console.info('Navigating to:', currentPage);
-      const page = await browser.newPage();
-      await page.goto(currentPage);
+      console.info(`Navigating to: ${currentPage}`);
+      const resp = await page.goto(currentPage);
+      if (! resp.ok()) {
+        console.warn(`Failed navigating to: ${currentPage}`);
+        failedNavigations += 1;
+        if (failedNavigations > maximumAllowedFailedNavigations) {
+          console.error(`Failed to many navigation attempts in a row. Terminating process`);
+          process.exit(1);
+        }
+        console.info(`Requeueing: ${currentPage}`);
+        pagesToScrape.push(currentPage);
+        continue;
+      } else {
+        failedNavigations = 0;
+      }
 
       console.info('Scraping images');
       const images = await page.evaluate(() => {
