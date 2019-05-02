@@ -1,0 +1,39 @@
+{
+  "name": "@olian/gw2iconscraper",
+  "version": "0.1.0",
+  "description": "",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Olian04/gw2IconScraper.git"
+  },
+  "keywords": [
+    "gw2",
+    "guild wars 2",
+    "guild wars",
+    "icon",
+    "scraping",
+    "scrape",
+    "scraper",
+    "web"
+  ],
+  "author": "Olian04",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Olian04/gw2IconScraper/issues"
+  },
+  "homepage": "https://github.com/Olian04/gw2IconScraper#readme",
+  "dependencies": {
+    "@types/puppeteer": "^1.12.3",
+    "@types/request": "^2.48.1",
+    "@types/strip-ansi": "^5.2.1",
+    "better-logging": "^3.4.0",
+    "puppeteer": "^1.15.0",
+    "request": "^2.88.0",
+    "strip-ansi": "^5.2.0"
+  }
+}
