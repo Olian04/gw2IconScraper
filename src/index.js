@@ -46,7 +46,7 @@ const URLS = {
     const maximumAllowedFailedNavigations = 10;
 
     while (pagesToScrape.length > 0) {
-      const currentPage = pagesToScrape.pop();
+      const currentPage = pagesToScrape.shift();
       const currentPageName = currentPage.substring(currentPage.lastIndexOf('/Category:') + '/Category:'.length);
 
       console.info(`Navigating to: ${currentPage}`);
