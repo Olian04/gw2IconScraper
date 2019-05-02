@@ -65,7 +65,8 @@ const URLS = {
       imagesDownloading.push(...images.map(uri => {
         const indexOfLastSlash =  uri.lastIndexOf('/');
         const fileName = uri.substring(indexOfLastSlash);
-        return downloadFile(uri, join(currentPageName, fileName));
+        return downloadFile(uri, join(currentPageName, fileName))
+          .catch(console.warn); // Errors when downloading a single file shouldn't abort the entire program
       }));
 
       console.info('Scraping category links');
