@@ -5,6 +5,9 @@ const stripAnsi = require('strip-ansi').default;
 
 //#region Setup logging
 const inOutDir = path => join(__dirname, '..', 'out', path);
+if (! fs.existsSync(inOutDir(''))) {
+  fs.mkdirSync(inOutDir(''));
+}
 fs.writeFileSync(inOutDir('latest.log'), '');
 require('better-logging').default(console, {
   format: ctx => `${ctx.date} ${ctx.time24} ${ctx.type} ${ctx.msg}`,
